@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2025/02/18",
+    "title": "third sample",
+    "htmlPath": "/slides/20250218-third-sample.html",
+    "pdfPath": "/slides/20250218-third-sample.pdf"
+  },
+  {
+    "date": "2025/02/17",
+    "title": "another sample",
+    "htmlPath": "/slides/20250217-another-sample.html",
+    "pdfPath": "/slides/20250217-another-sample.pdf"
+  },
+  {
+    "date": "2025/02/16",
+    "title": "sample slide",
+    "htmlPath": "/slides/20250216-sample-slide.html",
+    "pdfPath": "/slides/20250216-sample-slide.pdf"
+  }
+]
