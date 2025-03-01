@@ -30,9 +30,9 @@ async function buildSlides() {
     const existingFiles = new Map();
     try {
       console.log('Checking existing files...');
-      const files = await fs.readdir('public/slides');
+      const files = await fs.readdir('dist/slides');
       for (const file of files) {
-        const stat = await fs.stat(path.join('public/slides', file));
+        const stat = await fs.stat(path.join('dist/slides', file));
         existingFiles.set(file, stat.mtime);
       }
       console.log(`Found ${existingFiles.size} existing files`);
@@ -104,8 +104,8 @@ async function buildSlides() {
       return {
         date: `${year}/${month}/${day}`,
         title: basename.length > 8 ? basename.substring(9).replace(/-/g, ' ') : 'Untitled',
-        htmlPath: `/slides/${basename}.html`,
-        pdfPath: `/slides/${basename}.pdf`
+        htmlPath: `slides/${basename}.html`,
+        pdfPath: `slides/${basename}.pdf`
       };
     })
     .sort((a, b) => {
