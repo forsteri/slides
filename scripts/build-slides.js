@@ -24,7 +24,6 @@ async function buildSlides() {
 
     // 出力ディレクトリの作成
     //await fs.mkdir('public/slides', { recursive: true });
-
     await fs.mkdir('dist/slides', { recursive: true });
 
     // 既存のビルド済みファイルの確認
