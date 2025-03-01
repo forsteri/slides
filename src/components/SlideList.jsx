@@ -11,7 +11,7 @@ const SlideList = () => {
             Slides Collection
           </h1>
           <p className="text-xl text-gray-600">
-            スライドコレクション
+            スライド集
           </p>
         </div>
 
