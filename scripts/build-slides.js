@@ -23,16 +23,16 @@ async function buildSlides() {
     console.log('Starting build process...');
 
     // 出力ディレクトリの作成
-    //await fs.mkdir('public/slides', { recursive: true });
-    await fs.mkdir('dist/slides', { recursive: true });
+    await fs.mkdir('public/slides', { recursive: true });
+    //await fs.mkdir('dist/slides', { recursive: true });
 
     // 既存のビルド済みファイルの確認
     const existingFiles = new Map();
     try {
       console.log('Checking existing files...');
-      const files = await fs.readdir('dist/slides');
+      const files = await fs.readdir('public/slides');
       for (const file of files) {
-        const stat = await fs.stat(path.join('dist/slides', file));
+        const stat = await fs.stat(path.join('public/slides', file));
         existingFiles.set(file, stat.mtime);
       }
       console.log(`Found ${existingFiles.size} existing files`);
@@ -75,7 +75,7 @@ async function buildSlides() {
         await execCommand('@marp-team/marp-cli', [
           filePath,
           '-o',
-          `dist/slides/${basename}.html`
+          `public/slides/${basename}.html`
         ]);
         
         // PDFの生成
@@ -83,7 +83,7 @@ async function buildSlides() {
         await execCommand('@marp-team/marp-cli', [
           filePath,
           '-o',
-          `dist/slides/${basename}.pdf`,
+          `public/slides/${basename}.pdf`,
           '--pdf'
         ]);
         
