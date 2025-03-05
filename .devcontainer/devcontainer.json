@@ -8,9 +8,22 @@
         "extensions": [
           "dbaeumer.vscode-eslint",
           "esbenp.prettier-vscode",
-          "marp-team.marp-vscode"
-        ]
-      }
+          "marp-team.marp-vscode",
+          "yzhang.markdown-all-in-one",
+          "bierner.markdown-preview-github-styles",
+          "streetsidesoftware.code-spell-checker",
+          "dsznajder.es7-react-js-snippets",
+          "bradlc.vscode-tailwindcss"          
+        ],
+        "settings": {
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "files.autoSave": "afterDelay",
+          "emmet.includeLanguages": {
+            "javascript": "javascriptreact"
+          }
+        }
+      }        
     },
     "forwardPorts": [5173],
     "postCreateCommand": "npm install",
