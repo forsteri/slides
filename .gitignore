@@ -1,4 +1,5 @@
 node_modules
 .DS_Store
+# ドラフトスライド関連ファイルを除外
 public/drafts/
-src/data/drafts.jsons
+src/data/drafts.json
