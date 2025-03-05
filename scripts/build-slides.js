@@ -159,6 +159,16 @@ async function buildSlides() {
       JSON.stringify(
         {
           published: publishedSlides,
+        },
+        null,
+        2
+      )
+    );
+    // 下書き用のJSONは別ファイルに保存（gitignoreに含める）
+    await fs.writeFile(
+      "src/data/drafts.json",
+      JSON.stringify(
+        {
           drafts: draftSlides,
         },
         null,

@@ -1,13 +1,6 @@
 {
   "published": [
     {
-      "date": "2025/03/05",
-      "title": "5th sample",
-      "htmlPath": "slides/20250305-5th-sample.html",
-      "pdfPath": "slides/20250305-5th-sample.pdf",
-      "status": "published"
-    },
-    {
       "date": "2025/03/01",
       "title": "4th sample",
       "htmlPath": "slides/20250301-4th-sample.html",
@@ -35,6 +28,5 @@
       "pdfPath": "slides/20250216-sample-slide.pdf",
       "status": "published"
     }
-  ],
-  "drafts": []
+  ]
 }
