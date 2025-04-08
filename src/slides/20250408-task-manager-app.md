@@ -7,7 +7,7 @@ paginate: true
 
 <!-- _class: lead -->
 
-# サーバレスタスク管理アプリケーション
+# 作って学ぶ！サーバレスアプリ開発
 
 AWS CDK を活用したサーバレスアーキテクチャの実装例
 
@@ -124,7 +124,11 @@ const api = new apigateway.RestApi(this, "TaskApi", {
     allowMethods: apigateway.Cors.ALL_METHODS,
   },
 });
+```
 
+---
+
+```typescript
 const tasksResource = api.root.addResource("tasks");
 tasksResource.addMethod(
   "POST",
@@ -161,7 +165,11 @@ const frontendBucket = new s3.Bucket(this, "FrontendBucket", {
   websiteIndexDocument: "index.html",
   removalPolicy: cdk.RemovalPolicy.DESTROY,
 });
+```
 
+---
+
+```typescript
 // CloudFrontディストリビューションを作成
 const distribution = new cloudfront.Distribution(
   this,
@@ -200,7 +208,11 @@ export const handler = async (event: any) => {
       description: { S: body.description || "" },
       createdAt: { S: createdAt },
     };
+```
 
+---
+
+```typescript
     await dynamoDb.send(
       new PutItemCommand({
         TableName: tableName,
@@ -231,6 +243,8 @@ export const handler = async (event: any) => {
   <ul id="task-list"></ul>
 </div>
 ```
+
+---
 
 ```css
 body {
@@ -268,11 +282,15 @@ jobs:
         run: |
           npm install
           npm run build
+```
 
-      - name: Deploy CDK stack
-        working-directory: infra
-        run: |
-          npx cdk deploy --require-approval never
+---
+
+```yaml
+- name: Deploy CDK stack
+  working-directory: infra
+  run: |
+    npx cdk deploy --require-approval never
 ```
 
 ---
@@ -306,12 +324,6 @@ RUN case ${TARGETARCH} in \
 
 ---
 
-## デモ
-
-[ここでアプリケーションのデモを行います]
-
----
-
 ## 今後の改善点
 
 - ユーザー認証の追加
@@ -321,8 +333,17 @@ RUN case ${TARGETARCH} in \
 
 ---
 
+## 雑感
+
+- 本資料に記載のコードと本資料は 99% AI 製（ChatGPT+Claude）。
+-
+-
+
+## 資料
+
+- [成果物（GitHub リポジトリ）](https://github.com/forsteri/task-manager-app)
+- [おまけ](https://github.com/forsteri/slides)
+
+---
+
 <!-- _class: lead -->
-
-## ご質問・フィードバック
-
-ありがとうございました！
