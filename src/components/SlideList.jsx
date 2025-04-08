@@ -44,12 +44,7 @@ const SlideList = () => {
                       <BookOpen className="w-5 h-5" />
                     </button>
                     <button
-                      onClick={() => {
-                        const link = document.createElement("a");
-                        link.href = slide.pdfPath;
-                        link.download = `${slide.title}.pdf`;
-                        link.click();
-                      }}
+                      onClick={() => window.open(slide.pdfPath, "_blank")}
                       className="p-2 text-green-600 hover:text-green-800 hover:bg-green-50 rounded-full transition-colors"
                       title="PDFをダウンロード"
                     >
