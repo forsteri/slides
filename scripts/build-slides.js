@@ -108,6 +108,7 @@ async function buildSlides() {
           "--allow-local-files",
           "-o",
           `${outputDir}/${basename}.html`,
+          "--verbose",
         ]);
 
         // PDFの生成
