@@ -26,6 +26,15 @@ AWS CDK を活用したサーバレスアーキテクチャの実装例
 
 ## 技術スタック
 
+### 概要
+
+| 分野             | 使用技術                                                         |
+| ---------------- | ---------------------------------------------------------------- |
+| インフラ         | AWS CDK (IaC), AWS Lambda, API Gateway, DynamoDB, S3, CloudFront |
+| 開発環境         | VSCode（DevContainer）, Docker, GitHub                           |
+| 言語・ライブラリ | TypeScript, AWS SDK                                              |
+| CI/CD            | GitHub Actions                                                   |
+
 ### バックエンド
 
 - **DynamoDB**: タスクデータの永続化
