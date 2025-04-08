@@ -37,7 +37,7 @@ jobs:
         run: npm ci
 
       - name: Install font
-        run: sudo apt install fonts-noto
+        run: sudo apt install fonts-noto-cjk fonts-noto-color-emoji fonts-noto-cjk-extra
 
       - name: Setup Chrome for Marp
         uses: browser-actions/setup-chrome@v1
