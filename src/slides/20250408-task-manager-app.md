@@ -35,6 +35,8 @@ AWS CDK を活用したサーバレスアーキテクチャの実装例
 | 言語・ライブラリ | TypeScript, AWS SDK                                              |
 | CI/CD            | GitHub Actions                                                   |
 
+---
+
 ### バックエンド
 
 - **DynamoDB**: タスクデータの永続化
