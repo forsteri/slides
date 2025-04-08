@@ -1,0 +1,23 @@
+/* mytheme.css */
+/* デフォルトテーマを継承 */
+@import "default";
+
+/* 背景色と文字色をカスタマイズ */
+section {
+  background-color: #f5f5f5;
+  color: #333;
+  font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
+}
+
+/* 見出しのスタイル */
+h1 {
+  color: #0066cc;
+  border-bottom: 2px solid #0066cc;
+  padding-bottom: 8px;
+}
+
+/* 箇条書きのスタイル */
+ul li {
+  list-style-type: square;
+  color: #444;
+}
