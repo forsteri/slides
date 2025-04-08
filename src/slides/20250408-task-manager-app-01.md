@@ -26,15 +26,6 @@ AWS CDK を活用したサーバレスアーキテクチャの実装例
 
 ## 技術スタック
 
-### 概要
-
-| 分野             | 使用技術                                                         |
-| ---------------- | ---------------------------------------------------------------- |
-| インフラ         | AWS CDK (IaC), AWS Lambda, API Gateway, DynamoDB, S3, CloudFront |
-| 開発環境         | VSCode（DevContainer）, Docker, GitHub                           |
-| 言語・ライブラリ | TypeScript, AWS SDK                                              |
-| CI/CD            | GitHub Actions                                                   |
-
 ### バックエンド
 
 - **DynamoDB**: タスクデータの永続化
@@ -134,7 +125,11 @@ tasksResource.addMethod(
   "GET",
   new apigateway.LambdaIntegration(listTasksLambda)
 );
+```
 
+---
+
+```typescript
 const taskResource = tasksResource.addResource("{taskId}");
 taskResource.addMethod(
   "PATCH",
@@ -161,7 +156,11 @@ const frontendBucket = new s3.Bucket(this, "FrontendBucket", {
   websiteIndexDocument: "index.html",
   removalPolicy: cdk.RemovalPolicy.DESTROY,
 });
+```
 
+---
+
+```typescript
 // CloudFrontディストリビューションを作成
 const distribution = new cloudfront.Distribution(
   this,
@@ -200,7 +199,11 @@ export const handler = async (event: any) => {
       description: { S: body.description || "" },
       createdAt: { S: createdAt },
     };
+```
 
+---
+
+```typescript
     await dynamoDb.send(
       new PutItemCommand({
         TableName: tableName,
@@ -231,6 +234,8 @@ export const handler = async (event: any) => {
   <ul id="task-list"></ul>
 </div>
 ```
+
+---
 
 ```css
 body {
@@ -268,11 +273,15 @@ jobs:
         run: |
           npm install
           npm run build
+```
 
-      - name: Deploy CDK stack
-        working-directory: infra
-        run: |
-          npx cdk deploy --require-approval never
+---
+
+```yaml
+- name: Deploy CDK stack
+  working-directory: infra
+  run: |
+    npx cdk deploy --require-approval never
 ```
 
 ---
@@ -306,12 +315,6 @@ RUN case ${TARGETARCH} in \
 
 ---
 
-## デモ
-
-[ここでアプリケーションのデモを行います]
-
----
-
 ## 今後の改善点
 
 - ユーザー認証の追加
@@ -322,7 +325,3 @@ RUN case ${TARGETARCH} in \
 ---
 
 <!-- _class: lead -->
-
-## ご質問・フィードバック
-
-ありがとうございました！

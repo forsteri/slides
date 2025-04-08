@@ -2,6 +2,13 @@
   "published": [
     {
       "date": "2025/04/08",
+      "title": "task manager app 01",
+      "htmlPath": "slides/20250408-task-manager-app-01.html",
+      "pdfPath": "slides/20250408-task-manager-app-01.pdf",
+      "status": "published"
+    },
+    {
+      "date": "2025/04/08",
       "title": "task manager app",
       "htmlPath": "slides/20250408-task-manager-app.html",
       "pdfPath": "slides/20250408-task-manager-app.pdf",
