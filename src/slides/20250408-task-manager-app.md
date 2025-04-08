@@ -1,43 +1,47 @@
 ---
 marp: true
-theme: default
+theme: main-theme
 title: 作って学ぶ！サーバレスアプリ開発
 paginate: true
 ---
 
 <!-- _class: lead -->
+
 # サーバレスタスク管理アプリケーション
 
-AWS CDKを活用したサーバレスアーキテクチャの実装例
+AWS CDK を活用したサーバレスアーキテクチャの実装例
 
 ---
 
 ## プロジェクト概要
 
-シンプルなタスク管理アプリをAWS CDKを使用してサーバレスアーキテクチャで実装
+シンプルなタスク管理アプリを AWS CDK を使用してサーバレスアーキテクチャで実装
 
 - **完全サーバレス構成**: インフラ管理やサーバーメンテナンスが不要
-- **AWS CDKによるインフラのコード化**: インフラをTypeScriptで定義
-- **CI/CD自動化**: GitHub Actionsによる自動デプロイ
-- **シンプルなフロントエンド**: 直感的に操作できるUI
+- **AWS CDK によるインフラのコード化**: インフラを TypeScript で定義
+- **CI/CD 自動化**: GitHub Actions による自動デプロイ
+- **シンプルなフロントエンド**: 直感的に操作できる UI
 
 ---
 
 ## 技術スタック
 
 ### バックエンド
+
 - **DynamoDB**: タスクデータの永続化
-- **Lambda関数**: サーバレスAPIエンドポイント
-- **API Gateway**: RESTful APIインターフェース
+- **Lambda 関数**: サーバレス API エンドポイント
+- **API Gateway**: RESTful API インターフェース
 
 ### フロントエンド
+
 - HTML/CSS/JavaScript
-- S3でホスティング
-- CloudFrontで配信
+- S3 でホスティング
+- CloudFront で配信
 
 ### インフラ
-- **AWS CDK**: TypeScriptでインフラ定義
-- **GitHub Actions**: CI/CD自動化
+
+- **AWS CDK**: TypeScript でインフラ定義
+- **GitHub Actions**: CI/CD 自動化
 
 ---
 
@@ -62,22 +66,22 @@ AWS CDKを活用したサーバレスアーキテクチャの実装例
 
 ---
 
-## CDKのスタック構成
+## CDK のスタック構成
 
-プロジェクトは3つの主要なスタックで構成：
+プロジェクトは 3 つの主要なスタックで構成：
 
 ```typescript
 // infra/bin/main.ts
-const databaseStack = new TaskDatabaseStack(app, 'TaskDatabaseStack');
-const apiStack = new TaskApiStack(app, 'TaskApiStack', { databaseStack });
-const frontendStack = new TaskFrontendStack(app, 'TaskFrontendStack');
+const databaseStack = new TaskDatabaseStack(app, "TaskDatabaseStack");
+const apiStack = new TaskApiStack(app, "TaskApiStack", { databaseStack });
+const frontendStack = new TaskFrontendStack(app, "TaskFrontendStack");
 ```
 
 ---
 
 ## TaskDatabaseStack
 
-DynamoDBテーブルの定義：
+DynamoDB テーブルの定義：
 
 ```typescript
 // infra/lib/task-database-stack.ts
@@ -87,8 +91,8 @@ export class TaskDatabaseStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    this.taskTable = new dynamodb.Table(this, 'TaskTable', {
-      partitionKey: { name: 'taskId', type: dynamodb.AttributeType.STRING },
+    this.taskTable = new dynamodb.Table(this, "TaskTable", {
+      partitionKey: { name: "taskId", type: dynamodb.AttributeType.STRING },
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
   }
@@ -99,60 +103,77 @@ export class TaskDatabaseStack extends cdk.Stack {
 
 ## TaskApiStack
 
-Lambda関数とAPI Gatewayの定義：
+Lambda 関数と API Gateway の定義：
 
 ```typescript
 // API Gatewayを作成
-const api = new apigateway.RestApi(this, 'TaskApi', {
-  restApiName: 'Task Management API',
-  description: 'This service handles task operations.',
+const api = new apigateway.RestApi(this, "TaskApi", {
+  restApiName: "Task Management API",
+  description: "This service handles task operations.",
   defaultCorsPreflightOptions: {
     allowOrigins: apigateway.Cors.ALL_ORIGINS,
     allowMethods: apigateway.Cors.ALL_METHODS,
   },
 });
 
-const tasksResource = api.root.addResource('tasks');
-tasksResource.addMethod('POST', new apigateway.LambdaIntegration(createTaskLambda));
-tasksResource.addMethod('GET', new apigateway.LambdaIntegration(listTasksLambda));
+const tasksResource = api.root.addResource("tasks");
+tasksResource.addMethod(
+  "POST",
+  new apigateway.LambdaIntegration(createTaskLambda)
+);
+tasksResource.addMethod(
+  "GET",
+  new apigateway.LambdaIntegration(listTasksLambda)
+);
 
-const taskResource = tasksResource.addResource('{taskId}');
-taskResource.addMethod('PATCH', new apigateway.LambdaIntegration(updateTaskLambda));
-taskResource.addMethod('DELETE', new apigateway.LambdaIntegration(deleteTaskLambda));
+const taskResource = tasksResource.addResource("{taskId}");
+taskResource.addMethod(
+  "PATCH",
+  new apigateway.LambdaIntegration(updateTaskLambda)
+);
+taskResource.addMethod(
+  "DELETE",
+  new apigateway.LambdaIntegration(deleteTaskLambda)
+);
 ```
 
 ---
 
 ## TaskFrontendStack
 
-S3とCloudFrontの設定：
+S3 と CloudFront の設定：
 
 ```typescript
 // S3バケットを作成
-const frontendBucket = new s3.Bucket(this, 'FrontendBucket', {
-  bucketName: 'haji-task-manager-frontend-bucket',
+const frontendBucket = new s3.Bucket(this, "FrontendBucket", {
+  bucketName: "haji-task-manager-frontend-bucket",
   publicReadAccess: false,
   blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
-  websiteIndexDocument: 'index.html',
+  websiteIndexDocument: "index.html",
   removalPolicy: cdk.RemovalPolicy.DESTROY,
 });
 
 // CloudFrontディストリビューションを作成
-const distribution = new cloudfront.Distribution(this, 'Haji-FrontendDistribution', {
-  defaultRootObject: 'index.html',
-  defaultBehavior: {
-    origin: cdk.aws_cloudfront_origins.S3BucketOrigin.withOriginAccessControl(
-      frontendBucket
-    ),
-    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-    cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
-  },
-});
+const distribution = new cloudfront.Distribution(
+  this,
+  "Haji-FrontendDistribution",
+  {
+    defaultRootObject: "index.html",
+    defaultBehavior: {
+      origin:
+        cdk.aws_cloudfront_origins.S3BucketOrigin.withOriginAccessControl(
+          frontendBucket
+        ),
+      viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+      cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
+    },
+  }
+);
 ```
 
 ---
 
-## Lambda関数の実装
+## Lambda 関数の実装
 
 例：タスク作成機能
 
@@ -167,16 +188,18 @@ export const handler = async (event: any) => {
     const taskItem = {
       taskId: { S: taskId },
       title: { S: body.title },
-      description: { S: body.description || '' },
-      createdAt: { S: createdAt }
+      description: { S: body.description || "" },
+      createdAt: { S: createdAt },
     };
 
-    await dynamoDb.send(new PutItemCommand({
-      TableName: tableName,
-      Item: taskItem
-    }));
+    await dynamoDb.send(
+      new PutItemCommand({
+        TableName: tableName,
+        Item: taskItem,
+      })
+    );
 
-    return { statusCode: 201, /* 省略 */ };
+    return { statusCode: 201 /* 省略 */ };
   } catch (error) {
     // エラー処理
   }
@@ -187,13 +210,13 @@ export const handler = async (event: any) => {
 
 ## フロントエンドの実装
 
-シンプルなHTMLとCSS：
+シンプルな HTML と CSS：
 
 ```html
 <div class="container">
   <h1>Task Manager</h1>
   <div>
-    <input id="task-input" type="text" placeholder="Enter a new task">
+    <input id="task-input" type="text" placeholder="Enter a new task" />
     <button id="add-task-btn">Add Task</button>
   </div>
   <ul id="task-list"></ul>
@@ -220,7 +243,7 @@ body {
 
 ## CI/CD パイプライン
 
-GitHub Actionsによる自動デプロイ：
+GitHub Actions による自動デプロイ：
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -230,13 +253,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
+
       - name: Build Lambda
         working-directory: lambda
         run: |
           npm install
           npm run build
-          
+
       - name: Deploy CDK stack
         working-directory: infra
         run: |
@@ -247,7 +270,7 @@ jobs:
 
 ## 開発環境の構築
 
-DevContainerによる一貫した開発環境：
+DevContainer による一貫した開発環境：
 
 ```Dockerfile
 # .devcontainer/Dockerfile
@@ -290,6 +313,7 @@ RUN case ${TARGETARCH} in \
 ---
 
 <!-- _class: lead -->
+
 ## ご質問・フィードバック
 
 ありがとうございました！
