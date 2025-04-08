@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # main ブランチに変更をプッシュしたときに実行
+      - main # main ブランチに変更をプッシュしたときに実行
 
 # 同時に実行されるジョブをひとつに制限
 concurrency:
@@ -13,49 +13,52 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: read
       pages: write
       id-token: write
-    
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-      
+          node-version: "20"
+          cache: "npm"
+
       - name: Install dependencies
         run: npm ci
-      
+
+      - name: Install font
+        run: sudo apt install fonts-noto
+
       - name: Setup Chrome for Marp
         uses: browser-actions/setup-chrome@v1
-      
+
       - name: Build slides
         run: npm run build:slides
         env:
           CHROME_PATH: chrome
           CHROME_ARGS: --no-sandbox
-      
+
       - name: Build React app
         run: npm run build
-      
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'dist'
-      
+          path: "dist"
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
