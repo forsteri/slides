@@ -85,7 +85,7 @@ AWS CDK を活用したサーバレスアーキテクチャの実装例
 
 ## アーキテクチャ図
 
-![](fig/fig01.drawio.svg)
+![](images/fig01.drawio.svg)
 
 ---
 

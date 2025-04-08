@@ -105,6 +105,7 @@ async function buildSlides() {
         console.log("- Generating HTML...");
         await execCommand("@marp-team/marp-cli", [
           filePath,
+          "--allow-local-files",
           "-o",
           `${outputDir}/${basename}.html`,
         ]);
@@ -113,6 +114,7 @@ async function buildSlides() {
         console.log("- Generating PDF...");
         await execCommand("@marp-team/marp-cli", [
           filePath,
+          "--allow-local-files",
           "-o",
           `${outputDir}/${basename}.pdf`,
           "--pdf",
