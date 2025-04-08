@@ -51,6 +51,10 @@ AWS CDK を活用したサーバレスアーキテクチャの実装例
 - S3 でホスティング
 - CloudFront で配信
 
+---
+
+## 技術スタック
+
 ### インフラ
 
 - **AWS CDK**: TypeScript でインフラ定義
@@ -375,7 +379,5 @@ RUN case ${TARGETARCH} in \
 
 - [成果物（GitHub リポジトリ）](https://github.com/forsteri/task-manager-app)
 - [おまけ](https://github.com/forsteri/slides)
-
----
 
 <!-- _class: lead -->
