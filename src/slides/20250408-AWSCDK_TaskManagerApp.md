@@ -2,6 +2,7 @@
 marp: true
 theme: main-theme
 title: 作って学ぶ！サーバレスアプリ開発
+date: 2025/04/08
 paginate: true
 ---
 

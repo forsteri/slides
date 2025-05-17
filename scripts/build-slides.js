@@ -128,14 +128,17 @@ async function buildSlides() {
 
       // スライド情報の作成
       const slideInfo = {
-        date: `${basename.substring(0, 4)}/${basename.substring(
-          4,
-          6
-        )}/${basename.substring(6, 8)}`,
+        date:
+          frontMatter.date ||
+          `${basename.substring(0, 4)}/${basename.substring(
+            4,
+            6
+          )}/${basename.substring(6, 8)}`,
         title:
-          basename.length > 8
+          frontMatter.title ||
+          (basename.length > 8
             ? basename.substring(9).replace(/-/g, " ")
-            : "Untitled",
+            : "Untitled"),
         htmlPath: `${
           status === "draft" ? "drafts" : "slides"
         }/${basename}.html`,
