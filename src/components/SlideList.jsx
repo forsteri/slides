@@ -11,9 +11,9 @@ const SlideList = () => {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Slides Collection
+            Slides Library
           </h1>
-          <p className="text-xl text-gray-600">スライドコレクション</p>
+          <p className="text-xl text-gray-600">スライドライブラリ</p>
         </div>
 
         <div className="space-y-4">
