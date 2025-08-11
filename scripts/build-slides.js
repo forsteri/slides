@@ -154,9 +154,18 @@ async function buildSlides() {
       }
     }
 
-    // 日付の降順でソート
-    publishedSlides.sort((a, b) => b.date.localeCompare(a.date));
-    draftSlides.sort((a, b) => b.date.localeCompare(a.date));
+    // 日付の降順でソート（YYYY/MM/DD形式を正しく比較）
+    publishedSlides.sort((a, b) => {
+      // YYYY/MM/DD を YYYY-MM-DD に変換してDate比較
+      const dateA = new Date(a.date.replace(/\//g, '-'));
+      const dateB = new Date(b.date.replace(/\//g, '-'));
+      return dateB - dateA; // 降順（新しい順）
+    });
+    draftSlides.sort((a, b) => {
+      const dateA = new Date(a.date.replace(/\//g, '-'));
+      const dateB = new Date(b.date.replace(/\//g, '-'));
+      return dateB - dateA;
+    });
 
     // slides.jsonの生成
     await fs.mkdir("src/data", { recursive: true });

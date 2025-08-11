@@ -1,3 +1,11 @@
 {
-  "drafts": []
+  "drafts": [
+    {
+      "date": "2025/06/09",
+      "title": "テーマサンプル",
+      "htmlPath": "drafts/20250609-theme-sample.html",
+      "pdfPath": "drafts/20250609-theme-sample.pdf",
+      "status": "draft"
+    }
+  ]
 }

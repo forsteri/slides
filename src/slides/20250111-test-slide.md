@@ -2,7 +2,7 @@
 marp: true
 theme: main-theme
 title: テストスライド
-date: 2025/01/11
+date: 2025/08/11
 paginate: true
 ---
 
