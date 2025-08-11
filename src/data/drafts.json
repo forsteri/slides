@@ -1,6 +1,13 @@
 {
   "drafts": [
     {
+      "date": "2025/08/11",
+      "title": "作って学ぶ！サーバレスアプリ開発",
+      "htmlPath": "drafts/20250811-test.html",
+      "pdfPath": "drafts/20250811-test.pdf",
+      "status": "draft"
+    },
+    {
       "date": "2025/06/09",
       "title": "テーマサンプル",
       "htmlPath": "drafts/20250609-theme-sample.html",
