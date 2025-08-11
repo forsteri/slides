@@ -1,13 +1,6 @@
 {
   "published": [
     {
-      "date": "2025/08/11",
-      "title": "テストスライド",
-      "htmlPath": "slides/20250111-test-slide.html",
-      "pdfPath": "slides/20250111-test-slide.pdf",
-      "status": "published"
-    },
-    {
       "date": "2025/04/08",
       "title": "作って学ぶ！サーバレスアプリ開発",
       "htmlPath": "slides/20250408-AWSCDK_TaskManagerApp.html",
