@@ -2,9 +2,16 @@
   "published": [
     {
       "date": "2025/04/08",
-      "title": "task manager app",
-      "htmlPath": "slides/20250408-task-manager-app.html",
-      "pdfPath": "slides/20250408-task-manager-app.pdf",
+      "title": "作って学ぶ！サーバレスアプリ開発",
+      "htmlPath": "slides/20250408-AWSCDK_TaskManagerApp.html",
+      "pdfPath": "slides/20250408-AWSCDK_TaskManagerApp.pdf",
+      "status": "published"
+    },
+    {
+      "date": "2025/01/11",
+      "title": "テストスライド",
+      "htmlPath": "slides/20250111-test-slide.html",
+      "pdfPath": "slides/20250111-test-slide.pdf",
       "status": "published"
     }
   ]
